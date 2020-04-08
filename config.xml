@@ -1,0 +1,31 @@
+<presets>
+   <scene>
+      <renderer>
+         <antialias>true</antialias>
+         <colorManagement>true</colorManagement>
+         <sortObjects>false</sortObjects>
+         <physicallyCorrectLights>false</physicallyCorrectLights>
+         <maxCanvasWidth>1920</maxCanvasWidth>
+         <maxCanvasHeight>1080</maxCanvasHeight>
+         <logarithmicDepthBuffer>auto</logarithmicDepthBuffer>
+         <precision>high</precision>
+         <alpha>true</alpha>
+      </renderer>
+      <light>
+         <defaultLightsEnabled>false</defaultLightsEnabled>
+      </light>
+      <shadow>
+         <enabled>false</enabled>
+         <autoUpdate>false</autoUpdate>
+         <type>pcf</type>
+      </shadow>
+      <background>
+         <color>#FFFFFF</color>
+         <transparent>false</transparent>
+      </background>
+      <loading-screen>
+         <enabled>false</enabled>
+
+      </loading-screen>
+   </scene>
+</presets>
