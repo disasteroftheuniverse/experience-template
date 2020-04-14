@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&family=Share+Tech+Mono&display=swap');
+
+.q-hidden {
+   display: none;
+}
+
+.q-load-overlay {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   z-index: 100;
+   width: 100%;
+   height: 100%;
+   background-color: #333;
+}
+
+.q-spinner-position {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 0px;
+   margin: 0px;
+}
+
+.q-enter-vr-button {
+   cursor: default;
+   line-height: 25px;
+   font-family: 'Share Tech', sans-serif;
+   font-size: 24px;
+   font-weight: lighter;
+   text-align: center;
+   letter-spacing: 0.5px;
+   /*text-transform: uppercase;*/
+   vertical-align: middle;
+   padding: 12px 48px 12px 48px;
+   border-style: none;
+   border-radius: 5px;
+   background-color: orange;
+   color: black;
+}
+
+.q-enter-vr-button:hover {
+   cursor: pointer;
+   border-style: solid;
+   border-width: 3px;
+   color: white;
+   border-color: white;
+}
+
+
+.q-close-modal-button {
+   cursor: default;
+   font-size: 32px;
+   position: absolute;
+   top: 16px;
+   right: 16px;
+   color: white;
+   opacity: 0.5;
+
+}
+
+.q-close-modal-button:hover {
+   cursor: pointer;
+   opacity: 0.9;
+   top: 15px;
+}
+
+
+progress {
+   min-width: 300px;
+   width: 60%;
+   height: 14px;
+   margin: 50px auto;
+   display: block;
+   border-radius: 7px;
+
+   /* Important Thing */
+
+   border: none;
+   background: #444;
+}
+
+progress::-webkit-progress-bar {
+   border-radius: 7px;
+   background-color: #444;
+   width: 60%;
+   /*border-radius: 2px;*/
+}
+
+progress::-webkit-progress-value {
+   background-color: orange;
+   border-radius: 7px;
+}
+
+progress::-moz-progress-bar {
+   background-color: orange;
+   border-radius: 7px;
+   /* style rules */
+}

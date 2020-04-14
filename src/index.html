@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
+${$oldIE.start} 
 <html class="no-js">
-<!--<![endif]-->
+${$oldIE.end} 
 
 <head>
+   
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title></title>
+   <title>Default</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 
-<body>
-   ${$browseHappy}
-   <a-scene ${$preset('scene.renderer')} ${$preset('scene.background')} ${$preset('scene.lights')} >
-      
-      <a-assets>
-         ${$asset('md-pot',require('./maya/exports/start.gltf'))}
-      </a-assets> 
+<body> 
+   ${$browseHappy} 
+   ${$loadOverlay} 
 
-      <a-entity gltf-model="#md-pot" position="0 0 0" scale="1 1 1"></a-entity>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="red"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+   <a-scene renderer="${$preset('scene.renderer')}" background="${$preset('scene.background')}" 
+      light="${$preset('scene.light')}" shadow="${$preset('scene.shadow')}" 
+      vr-mode-ui="${$preset('scene.vr_mode_ui')}" loading-screen="${$preset('scene.loading_screen')}">
+      
+      <a-assets timeout="${1000 * 60 * 10}"> 
+
+         ${$asset('md-botlab',require( './assets/botlab.glb' ))} 
+         ${$asset('md-botcity',require( './assets/botcity.glb' ))} 
+
+         ${$img('tx-env', require( './assets/tx.environment.png' ))} 
+         ${$img('tx-tiny', require( './assets/tiny.png' ))} 
+         ${$img('tx-cat', require( './assets/cat.jpg' ))} 
+
+         ${$video('vid-dell-outlet', require( './assets/Dell_Outlet-Gamers-Bumper_2.mp4' ) )} 
+
+         ${$audio('snd-glitch', require( './assets/Glitch Electronic.wav' ) )} 
+
+
+      </a-assets>
+
+      ${console.log(`foo bar foo`)}
+
+      <a-entity id="botlab" gltf-model="#md-botlab" position="0 0 0" scale="1 1 1"></a-entity>
+      <a-entity id="botcity" gltf-model="#md-botcity" position="0 0 0" scale="1 1 1"></a-entity>
+      
       <a-sky color="#ECECEC"></a-sky>
 
    </a-scene>
+
 </body>
 
 </html>
