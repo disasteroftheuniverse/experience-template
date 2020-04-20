@@ -144,9 +144,8 @@ var WebpackConfigX = function (mode, isdevbuild) {
                _.each(renderedAssets, (asset)=>{
                   var assetPath = path.posix.parse(asset);
 
-                  var niceURL = url.format((assetPath.ext==='.gz') ? path.posix.join(assetPath.dir,assetPath.name) : path.posix.join(assetPath.dir,assetPath.name+assetPath.ext))
+                  var niceURL = url.format((assetPath.ext==='.gz') ? path.posix.join(assetPath.dir,assetPath.name) : path.posix.join(assetPath.dir,assetPath.name+assetPath.ext));
                   var assetDesc = {
-                     //url: (assetPath.ext==='.gz') ? path.posix.join(assetPath.dir,assetPath.name) : path.posix.join(assetPath.dir,assetPath.name+assetPath.ext),
                      compressed: (assetPath.ext==='.gz'),
                      compressedURL: (assetPath.ext==='.gz') ? url.format(path.posix.join(assetPath.dir,assetPath.name+assetPath.ext)) : null,
                      url: niceURL,
@@ -163,7 +162,7 @@ var WebpackConfigX = function (mode, isdevbuild) {
 
                var manifest = Buffer.from(JSON.stringify(assetCollection,null,4));
 
-               fs.writeFileSync(path.resolve(__dirname,'./../dist/','express.json'),manifest,{encoding:'utf-8'});
+               fs.writeFileSync(path.resolve(__dirname,'./../dist/','assets.json'),manifest,{encoding:'utf-8'});
 
               
             });
