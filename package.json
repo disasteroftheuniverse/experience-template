@@ -4,13 +4,14 @@
   "description": "a template for creating super-xr content",
   "main": "./src/index.js",
   "scripts": {
-    "build": "webpack --config ./webpack/webpack.config.js --watch=false --mode=production",
-    "test": "http-server ./dist -g -p 8080",
-    "start": "nodemon",
+    "build:dev": "webpack --config ./webpack/webpack.config.js --watch=false --mode=development --devbuild=true",
+    "build:prod": "webpack --config ./webpack/webpack.config.js --watch=false --mode=production",
+    "http": "http-server ./dist -g -p 8080",
+    "test": "nodemon",
     "dev": "webpack-dev-server --config webpack/webpack.config.js --open --mode=development",
     "purge": "purge.sh",
     "ngrok-serve": "ngrok http 8080 -subdomain=mandatoryvr",
-    "supertest": "concurrently \"npm:ngrok-serve\" \"npm:test\""
+    "start": "concurrently \"npm:ngrok-serve\" \"npm:http\""
   },
   "author": "patrick pineda",
   "license": "MIT",
@@ -33,6 +34,7 @@
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
     "json-loader": "^0.5.7",
+    "md5": "^2.2.1",
     "mime-types": "^2.1.26",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.3",
@@ -43,22 +45,24 @@
     "serviceworker-webpack-plugin": "^1.0.1",
     "shortid": "^2.2.15",
     "slash": "^3.0.0",
-    "style-loader": "^1.1.3",
+    "style-loader": "^1.1.4",
     "terser-webpack-plugin": "^2.3.5",
     "url-loader": "^4.1.0",
+    "uuid": "^7.0.3",
     "webpack": "^4.42.1",
     "webpack-appcache-plugin": "^1.0.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
+    "webpack-shell-plugin": "^0.5.0",
     "xml2js": "^0.4.23"
   },
   "dependencies": {
     "aframe": "^1.0.4",
     "aframe-extras": "^6.1.0",
     "can-ajax": "^2.4.5",
+    "debug": "^4.1.1",
     "lodash": "^4.17.15",
     "object-path": "^0.11.4",
-    "save-dev": "0.0.1-security",
     "xml2json": "^0.12.0"
   }
 }

@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech&family=Share+Tech+Mono&display=swap');
+/*
+@import url(https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap);@import url(https://fonts.googleapis.com/css2?family=Share+Tech&family=Share+Tech+Mono&display=swap);
 
 .q-hidden {
    display: none;
+}
+
+.q-button-group {
+   opacity: 0;
+   z-index: 112;
 }
 
 .q-load-overlay {
    position: absolute;
    top: 0px;
    left: 0px;
-   z-index: 100;
+   z-index: 110;
    width: 100%;
    height: 100%;
    background-color: #333;
@@ -24,6 +29,14 @@
    margin: 0px;
 }
 
+.q-button-position {
+   position: absolute;
+   bottom: 1%;
+   right: 1%;
+   padding: 0px;
+   margin: 20px;
+}
+
 .q-enter-vr-button {
    cursor: default;
    line-height: 25px;
@@ -32,13 +45,13 @@
    font-weight: lighter;
    text-align: center;
    letter-spacing: 0.5px;
-   /*text-transform: uppercase;*/
    vertical-align: middle;
    padding: 12px 48px 12px 48px;
    border-style: none;
    border-radius: 5px;
    background-color: orange;
    color: black;
+
 }
 
 .q-enter-vr-button:hover {
@@ -68,34 +81,59 @@
 }
 
 
-progress {
-   min-width: 300px;
-   width: 60%;
-   height: 14px;
-   margin: 50px auto;
-   display: block;
-   border-radius: 7px;
 
-   /* Important Thing */
-
-   border: none;
-   background: #444;
-}
-
-progress::-webkit-progress-bar {
-   border-radius: 7px;
+.q-prog-bg {
+   display: inline-block;
+   width: 500px;
+   height: 18px;
    background-color: #444;
-   width: 60%;
-   /*border-radius: 2px;*/
+   border-radius: 0;
+   overflow: hidden;
+   padding: 0px;
+   margin: 0px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   opacity: 1.0;
+   z-index: 112;
+
+
 }
 
-progress::-webkit-progress-value {
-   background-color: orange;
-   border-radius: 7px;
+.q-prog-bar {
+   background: repeat linear-gradient(45deg, #ffc457 25%, #ffa938 25%, #ffa938 50%, #ffc457 50%, #ffc457 75%, #ffa938 75%);
+   background-size: 50px 50px;
+   background-position: 0px;
+   height: 100%;
+   width: 0%;
+   padding: 0px;
+   margin: 0px;
+   animation: q-progress-twizzle 1s linear infinite;
+
 }
 
-progress::-moz-progress-bar {
-   background-color: orange;
-   border-radius: 7px;
-   /* style rules */
+.q-appear {
+   animation: q-button-appear 1s ease-in-out;
+   opacity: 1;
 }
+
+@keyframes q-progress-twizzle {
+   from {
+      background-position: 0px;
+   }
+
+   to {
+      background-position: 50px;
+   }
+}
+
+@keyframes q-button-appear {
+   from {
+      opacity: 0.0;
+   }
+
+   to {
+      opacity: 1.0;
+   }
+}*/

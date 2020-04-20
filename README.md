@@ -1,31 +1,36 @@
 # XR Experience Template
 
-A template for creating XR experiences to deploy on the super-xr app. Easily create VR content with a starter template. Helps redude the amount of code needed to create a functional virtual reality.
+A template for creating XR experiences to deploy on the super-xr app. Easily create VR content with a starter template. Helps redude the amount of code needed to create a functional virtual reality. 
 
-# API
+Listed below are methods which can be entered in the **index.html** document which insert prescribed templates. You may also create your own templates in **templates.js.**
 
-## $browseHappy()
 
-Inserts redirect for users using an old browser.
+## $img
 
-## $player(options)
-
-Add a preset player rig to scene, define controls and interactions.
-
-### Options
-
-*controls* - One of '`gamepad`', '`hands`' or '`keyboard`'. Sets the default input for VR experiences. Hand tracking is not suitable for production usage at this time.
-
-*movement* - One of '`locomote`', '`teleport`' or '`none`'. Sets how player is able to move and navigate a room-scale scene.
-
-### Example
-
-```html
-...
-<a-entity id="foo"></a-entity>
-
-${$player({
-   controls: 'gamepad',
-   movement: 'locomate'
-})}
+```js
+${$img(id,require( path ))}
 ```
+* **id** - the desired id of the html image element, must be unique.
+* **path** - the path to the image you want to include.
+
+Imports an image and saves it into the `/assets/images/` directory. Supports JPG and PNG. 
+
+## $video
+
+```js
+${$video(id,require( path ))}
+```
+* **id** - the desired id of the html video element, must be unique.
+* **path** - the path to the video you want to include.
+
+Imports an image and saves it into the `/assets/video/` directory. Supports mp4 and WEBM. 
+
+## $audio
+
+```js
+${$audio(id,require( path ))}
+```
+* **id** - the desired id of the html audio element, must be unique.
+* **path** - the path to the audio you want to include.
+
+Imports an image and saves it into the `/assets/audio/` directory. Supports mp3 and ogg.

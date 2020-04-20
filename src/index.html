@@ -10,10 +10,12 @@ ${$oldIE.end}
    <title>Default</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   ${$fonts} 
 
 </head>
 
 <body> 
+   ${$noscript} 
    ${$browseHappy} 
    ${$loadOverlay} 
 
@@ -32,17 +34,18 @@ ${$oldIE.end}
 
          ${$video('vid-dell-outlet', require( './assets/Dell_Outlet-Gamers-Bumper_2.mp4' ) )} 
 
-         ${$audio('snd-glitch', require( './assets/Glitch Electronic.wav' ) )} 
+         ${$audio('snd-glitch', require( './assets/Glitch_Electronic.wav' ) )} 
 
 
       </a-assets>
 
-      ${console.log(`foo bar foo`)}
+      
 
       <a-entity id="botlab" gltf-model="#md-botlab" position="0 0 0" scale="1 1 1"></a-entity>
       <a-entity id="botcity" gltf-model="#md-botcity" position="0 0 0" scale="1 1 1"></a-entity>
       
       <a-sky color="#ECECEC"></a-sky>
+
 
    </a-scene>
 
