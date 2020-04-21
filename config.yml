@@ -1,0 +1,14 @@
+---
+name: dist041920
+description: an example template for creating super-xr experiences
+public: false
+price: $0.00
+devices:
+  google-cardboard: false
+  google-daydream: false
+  oculus-go: false
+  oculus-quest: true
+  oculus-rift: true
+  windows-mixed-reality: true
+  htc-vive: true
+  htc-galaxy: true

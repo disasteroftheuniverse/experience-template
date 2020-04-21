@@ -54,13 +54,15 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-shell-plugin": "^0.5.0",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "yaml": "^1.9.2"
   },
   "dependencies": {
     "aframe": "^1.0.4",
     "aframe-extras": "^6.1.0",
     "can-ajax": "^2.4.5",
     "debug": "^4.1.1",
+    "html-beautify-webpack-plugin": "^1.0.5",
     "lodash": "^4.17.15",
     "object-path": "^0.11.4",
     "xml2json": "^0.12.0"

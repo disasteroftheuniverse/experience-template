@@ -13,6 +13,7 @@ var shortId = require('shortid');
 //const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HtmlBeautifyPlugin = require('html-beautify-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 var compressionExtensionRegex = /\.(js|css|glb|gltf|bin|obj|fbx|mp3)$/;
 
@@ -25,8 +26,19 @@ var assetManifest = {};
 var styleParser = require('aframe/src/utils/styleParser');
 var objectPath = require('object-path');
 var _ = require('lodash');
+var yaml = require('yaml');
+
+var yamlConfig = yaml.parse(fs.readFileSync(path.resolve(__dirname,'./../config.yml'),{encoding:'utf-8'}));
+console.log(yamlConfig);
 
 var expressMap = [];
+var userConfigurationOptions = {};
+
+var registerConfiguration = function(key,val){
+   userConfigurationOptions[key]=val;
+   //console.log(userConfigurationOptions);
+   
+};
 
 /**
       HTML Templates
@@ -35,7 +47,7 @@ var sceneConfig = require('./webpack.vr.settings');
 var htmlTemplateParameters = require('./webpack.templates')( 
    sceneConfig, objectPath,
     _, mime, randomWords, 
-    styleParser, path, assetManifest, compressionExtensionRegex );
+    styleParser, path, assetManifest, compressionExtensionRegex, registerConfiguration );
 var fileLoaderDest = require('./webpack.paths');
 
 
@@ -130,9 +142,7 @@ var WebpackConfigX = function (mode, isdevbuild) {
             collapseWhitespace: false
          },
       }),
-      /*new HardSourceWebpackPlugin({
-         cacheDirectory: path.resolve('C:\\tmp\\blah'),
-      }),*/
+      //new HtmlBeautifyPlugin(),
       new CleanWebpackPlugin(),
       {
          apply: (compiler)=>{
@@ -155,14 +165,16 @@ var WebpackConfigX = function (mode, isdevbuild) {
                   };
                   assetCollection[niceURL]=assetDesc;
 
-
                });
 
-               console.log(assetCollection);
+               var userConfiguationFile = Buffer.from(JSON.stringify(userConfigurationOptions,null,4));
+
+               //console.log(assetCollection);
 
                var manifest = Buffer.from(JSON.stringify(assetCollection,null,4));
 
                fs.writeFileSync(path.resolve(__dirname,'./../dist/','assets.json'),manifest,{encoding:'utf-8'});
+               fs.writeFileSync(path.resolve(__dirname,'./../dist/','config.json'),userConfiguationFile,{encoding:'utf-8'});
 
               
             });

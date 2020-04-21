@@ -4,9 +4,12 @@
 var shortId = require('shortid');
 var url = require('url');
 
+var UserSchema = require('./webpack.userschema');
+//var 
+
 module.exports = function (sceneConfig, objectPath, _, 
    mime, randomWords, styleParser, path, 
-   assetManifest, compressionExtensionRegex) {
+   assetManifest, compressionExtensionRegex, registerConfiguration) {
 
    var attrPreset = function (obj, keypath) {
       var key = _.last(keypath.split('.'));
@@ -75,27 +78,71 @@ module.exports = function (sceneConfig, objectPath, _,
       $preset: function (prop) {
          return attrPreset(sceneConfig, prop);
       },
-      $asset: function (id, asseturl) {
-         var guess = registerAsset(id, asseturl);
-         return `<a-asset-item id="${id}" src="${asseturl}" type="${guess.type}" data-uuid="${guess.uid}"></a-asset-item>`;
+      $uid: function () {
+         var sid = shortId.generate();
+         return sid;
       },
-      $video: function (id, asseturl) {
+      $asset: function (id, asseturl, use) {
          var guess = registerAsset(id, asseturl);
-         return `<video id="${id}" src="${asseturl}" type="${guess.type}" playsinline webkit-playsinline crossorigin="anonymous" data-uuid="${guess.uid}"></video>`;
-      },
-      $audio: function (id, asseturl) {
-         var guess = registerAsset(id, asseturl);
-         return `<audio id="${id}" src="${asseturl}" type="${guess.type}" playsinline webkit-playsinline crossorigin="anonymous" data-uuid="${guess.uid}"></audio>`;
-      },
-      $img: function (id, asseturl) {
-         var guess = registerAsset(id, asseturl);
-         return `<img id="${id}" src="${asseturl}" type="${guess.type}" alt="virtual realty 3D texture" data-uuid="${guess.uid}" />`;
-      },
-      $config: function (opts, cb) {
-         if (cb){
-            cb(opts);
+         var assetTag = `<a-asset-item id="${id}" src="${asseturl}" type="${guess.type}" data-uuid="${guess.uid}"></a-asset-item>`;
+         if (use && use==='false') {
+            return `<!-- ${assetTag} -->`;
+         } else {
+            return assetTag;
          }
-         return opts;
+         
+      },
+      $video: function (id, asseturl, use) {
+         var guess = registerAsset(id, asseturl);
+         var assetTag = `<video id="${id}" src="${asseturl}" type="${guess.type}" playsinline webkit-playsinline crossorigin="anonymous" data-uuid="${guess.uid}"></video>`;
+         if (use && use==='false') {
+            return `<!-- ${assetTag} -->`;
+         } else {
+            return assetTag;
+         }
+         
+      },
+      $audio: function (id, asseturl, use){
+         var guess = registerAsset(id, asseturl);
+         var assetTag =  `<audio id="${id}" src="${asseturl}" type="${guess.type}" playsinline webkit-playsinline crossorigin="anonymous" data-uuid="${guess.uid}"></audio>`;
+
+         if (use && use==='false') {
+            return `<!-- ${assetTag} -->`;
+         } else {
+            return assetTag;
+         }
+      },
+      $img: function (id, asseturl, use){
+         var guess = registerAsset(id, asseturl);
+         var assetTag =  `<img id="${id}" src="${asseturl}" type="${guess.type}" alt="virtual realty 3D texture" data-uuid="${guess.uid}" />`;
+
+         if (use && use==='false') {
+            return `<!-- ${assetTag} -->`;
+         } else {
+            return assetTag;
+         }
+      },
+      $config: {
+         enum: (name, list) =>{
+            var option = new UserSchema.Enum(name,list);
+            registerConfiguration(name,option);
+            return '${' + name + '}';
+         },
+         toggle: (name, value) =>{
+            var option = new UserSchema.Toggle(name,value);
+            registerConfiguration(name,option);
+            return '${' + name + '}';
+         },
+         msg: (name, value) =>{
+            var option = new UserSchema.Msg(name,value);
+            registerConfiguration(name,option);
+            return '${' + name + '}';
+         },
+         asset: (name, list) =>{
+            var option = new UserSchema.Enum(name,list);
+            registerConfiguration(name,option);
+            return '${' + name + '}';
+         },
       }
    };
    return templates;
