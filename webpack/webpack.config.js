@@ -16,6 +16,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const HtmlBeautifyPlugin = require('html-beautify-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 var compressionExtensionRegex = /\.(js|css|glb|gltf|bin|obj|fbx|mp3)$/;
+const CopyPlugin = require('copy-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -44,10 +45,12 @@ var registerConfiguration = function(key,val){
       HTML Templates
 */
 var sceneConfig = require('./webpack.vr.settings');
-var htmlTemplateParameters = require('./webpack.templates')( 
+var htmlTemplateParameters = function(mode, isdevbuild){
+   return require('./webpack.templates')( 
    sceneConfig, objectPath,
     _, mime, randomWords, 
-    styleParser, path, assetManifest, compressionExtensionRegex, registerConfiguration );
+    styleParser, path, assetManifest, compressionExtensionRegex, registerConfiguration, mode,isdevbuild );
+};
 var fileLoaderDest = require('./webpack.paths');
 
 
@@ -134,7 +137,7 @@ var WebpackConfigX = function (mode, isdevbuild) {
          title: 'My VR Template',
          template: 'src/index.html',
          inject: 'head',
-         templateParameters: htmlTemplateParameters,
+         templateParameters: htmlTemplateParameters(mode,isdevbuild),
          xhtml: false,
          filename: 'index.html',
          chunks: ['index'],
@@ -256,7 +259,14 @@ var WebpackConfigX = function (mode, isdevbuild) {
             },
             minRatio: Number.MAX_SAFE_INTEGER,
             deleteOriginalAssets: true,
-         })
+         }),
+         new CopyPlugin([
+            {
+              from: path.resolve(__dirname,'../src/product/'),
+              to: path.resolve(__dirname,'../dist/graphics/'),
+              toType: 'dir'
+            },
+          ],{debug: 'debug'})
          
       ];
 

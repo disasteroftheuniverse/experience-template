@@ -9,7 +9,11 @@ var UserSchema = require('./webpack.userschema');
 
 module.exports = function (sceneConfig, objectPath, _, 
    mime, randomWords, styleParser, path, 
-   assetManifest, compressionExtensionRegex, registerConfiguration) {
+   assetManifest, compressionExtensionRegex, registerConfiguration, mode, isdevbuild) {
+
+      console.log('MODE------------')
+      console.log(mode)
+      console.log('MODE------------')
 
    var attrPreset = function (obj, keypath) {
       var key = _.last(keypath.split('.'));
@@ -125,8 +129,24 @@ module.exports = function (sceneConfig, objectPath, _,
       $config: {
          enum: (name, list) =>{
             var option = new UserSchema.Enum(name,list);
+            
+            var devDefault=list[0];
+            if (_.isArray(list[0]) && list[0].length>=2) {
+               
+               option.map = {};
+
+               _.each(list, (val,key)=>{
+                  option.map[val[0]] = val[1];
+               });
+
+               if (mode==='development'){
+                  devDefault=list[0][1];
+               }
+
+            } 
+
             registerConfiguration(name,option);
-            return '${' + name + '}';
+            return (mode==='production') ? '${' + name + '}' : devDefault;
          },
          toggle: (name, value) =>{
             var option = new UserSchema.Toggle(name,value);
@@ -141,7 +161,7 @@ module.exports = function (sceneConfig, objectPath, _,
          asset: (name, list) =>{
             var option = new UserSchema.Enum(name,list);
             registerConfiguration(name,option);
-            return '${' + name + '}';
+            return (mode==='production') ? '${' + name + '}' : list[0];
          },
       }
    };

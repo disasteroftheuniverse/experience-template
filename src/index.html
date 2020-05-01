@@ -26,8 +26,8 @@ ${$oldIE.end}
       <a-assets timeout="${1000 * 60 * 10}"> 
 
          ${$config.enum('arena',[
-            $asset('md-botlab', require( './assets/botlab.glb' ), 'true'),
-            $asset('md-botlab', require( './assets/botcity.glb' ), 'true')
+            ['Robot City', $asset('md-botlab', require( './assets/botlab.glb' ), 'true')],
+            ['Robot Factory', $asset('md-botlab', require( './assets/botcity.glb' ), 'true')]
          ])}
 
          ${$img('tx-env', require( './assets/tx.environment.png' ))} 
@@ -45,7 +45,7 @@ ${$oldIE.end}
       <a-entity id="botlab" gltf-model="#md-botlab" position="0 0 0" scale="1 1 1"></a-entity>
 
       
-      <a-sky color="${$config.enum('skycolor',[['blue','blue'],['red','red'],['pink','pink']])}"></a-sky>
+      <a-sky color="${$config.enum('skycolor',[['Sky Blue','cyan'],['Heck','red'],['Hot Pink','pink']])}"></a-sky>
 
    </a-scene>
 
