@@ -41,11 +41,21 @@ ${$oldIE.end}
 
       </a-assets>
 
+      <a-entity id="vr-player" position=" 0 0 0" movement-controls="fly: true; camera: #vr-camera; speed: 0.05;">
+         <a-entity id="vr-camera" camera look-controls position="0 1.6 0"></a-entity>
+      </a-entity>
+
 
       <a-entity id="botlab" gltf-model="#md-botlab" position="0 0 0" scale="1 1 1"></a-entity>
 
+      ${$config.toggle('box',`<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>`)}
+
+
+      <a-text value="${$config.msg('hello','Message in a bottle')}"></a-text>
+
+
       
-      <a-sky color="${$config.enum('skycolor',[['Sky Blue','cyan'],['Heck','red'],['Hot Pink','pink']])}"></a-sky>
+      <a-sky color="${$config.enum('skycolor',[['Sky Blue','white'],['Heck','red'],['Hot Pink','pink']])}"></a-sky>
 
    </a-scene>
 

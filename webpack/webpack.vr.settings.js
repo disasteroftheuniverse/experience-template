@@ -14,7 +14,7 @@ module.exports = {
          highRefreshRate: true
       },
       light: {
-         defaultLightsEnabled: false
+         defaultLightsEnabled: true
       },
       shadow: {
          enabled: false,

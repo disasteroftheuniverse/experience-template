@@ -3,8 +3,10 @@
 //var _ = require('lodash');
 var shortId = require('shortid');
 var url = require('url');
+var codec = require('json-url')('lzstring');
 
 var UserSchema = require('./webpack.userschema');
+//var parseString = require('xml2js').parseString;
 //var 
 
 module.exports = function (sceneConfig, objectPath, _, 
@@ -133,11 +135,19 @@ module.exports = function (sceneConfig, objectPath, _,
             var devDefault=list[0];
             if (_.isArray(list[0]) && list[0].length>=2) {
                
-               option.map = {};
+               option.oneOf = {};
+               option.default= list[0][0];
 
                _.each(list, (val,key)=>{
-                  option.map[val[0]] = val[1];
+
+
+                  option.oneOf[val[0]] = val[1]; 
                });
+
+               delete option.list;
+               delete option.value;
+
+               
 
                if (mode==='development'){
                   devDefault=list[0][1];
@@ -151,12 +161,12 @@ module.exports = function (sceneConfig, objectPath, _,
          toggle: (name, value) =>{
             var option = new UserSchema.Toggle(name,value);
             registerConfiguration(name,option);
-            return '${' + name + '}';
+            return (mode==='production') ? '${' + name + '}' : option.default;
          },
          msg: (name, value) =>{
             var option = new UserSchema.Msg(name,value);
             registerConfiguration(name,option);
-            return '${' + name + '}';
+            return (mode==='production') ? '${' + name + '}' : value;
          },
          asset: (name, list) =>{
             var option = new UserSchema.Enum(name,list);

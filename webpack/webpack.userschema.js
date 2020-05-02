@@ -18,6 +18,7 @@ module.exports = {
       this.uid = shortid.generate();
       this.type = 'toggle';
       this.value=value;
+      this.default=true;
       return this;
    },
    Msg: function (name, value) {
